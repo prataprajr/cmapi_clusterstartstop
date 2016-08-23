@@ -8,7 +8,7 @@ This script lets you start and (gracefully) stop a Cloudera Hadoop cluster. The 
  - Central management script(which is the only file that a user needs to modify) is written in bash.
 
 ##Typical use cases
- - Can be used to automate shutdown and start of Hadoop cluster during off peak hours. Most cloud providers bill VMs per hour, so you can have considerable savings by coupling this script to the inbuilt VM shutdown/start utility. For example, in AWS you can link this to Lambda.
+ - Can be used to automate shutdown and start of Hadoop cluster during off peak hours. Most cloud providers bill VMs per hour, so you can have considerable savings on monthly bill by coupling this script to the inbuilt VM shutdown/start utility. For example, in AWS you can link this to Lambda.
  - Quickly stop/start multiple Cloudera Hadoop clusters during maintenance(Eg: Datacenter power maintenance).
 
 ##Pre-requisites
