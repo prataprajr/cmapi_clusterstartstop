@@ -3,8 +3,8 @@ Start or stop Cloudera Manager, CDH and daemons via CM API
 
 ##Introduction
 This script lets you start and (gracefully) stop a Cloudera Hadoop cluster. The highlights are:
- - Uses CM API(python client) for managing CDH and CM services, so will support all Cloudera versions till date(<CDH 5.7.1)
- - Uses Ansbile 'service' module for managing Linux daemons(cloudera-scm-[agent,server,server-db]), so is portable across all Linux versions.
+ - Uses CM API(python client) for managing CDH and CM services, so is portable across multiple Cloudera versions. Tested on 5.7.1
+ - Uses Ansbile 'service' module for managing Linux daemons(cloudera-scm-[agent,server,server-db]), so is portable across multiple Linux versions. Tested on RHEL 7.1
  - Central management script(which is the only file that a user needs to modify) is written in bash.
 
 ##Typical use cases
