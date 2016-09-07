@@ -13,13 +13,20 @@
 
 #################   Variables to be modified by user  ######################
 LambdaFunction="StartStopInstances"
+# Leave LambdaVersion blank if you want to use the LATEST code in Lambda
+LambdaVersion=""
 Region="eu-west-1"
-LambdaOurputFile='LambdaOuput.txt'
+LambdaOutputFile="LambdaOuput.txt"
 LambdaLogFile="startstop.log"
 # Comma seperated InstanceList
 # eg: InstanceList="NameOfInstance1, NameOfInstance2" 
-InstanceList="NameNode1"
+InstanceList="DataNode1"
 ############################################################################
+
+# Point to latest version of Lambda if no version is specified
+if [ -z $LambdaVersion ]; then
+	LambdaVersion="\$LATEST"
+fi
 
 
 ## Function definition Usagehelp()
@@ -36,7 +43,13 @@ function usagehelp ()
 function start-stop ()
 {
 	echo date >> $LambdaLogFile
-	aws lambda invoke --log-type Tail --function-name "$LambdaFunction" --region "$Region" --payload '{"action": "'"$1"'","instances":"'"$InstanceList"'"}' "$LambdaOurputFile" >> $LambdaLogFile
+	aws lambda invoke \
+		--log-type Tail \
+		--function-name "$LambdaFunction" \
+		--region "$Region" \
+		--payload '{"action": "'"$1"'","instances":"'"$InstanceList"'"}'\
+		--qualifier "$LambdaVersion"\
+		"$LambdaOutputFile" >> $LambdaLogFile
 	echo "Status:"
 	tail -4 $LambdaLogFile |grep LogResult|cut -d\" -f4|base64 --decode
 }
@@ -47,11 +60,11 @@ function start-stop ()
 case $1 in
 start )
 	echo "Starting ec2 instances" >> $LambdaLogFile
-	start-stop
+	start-stop start
 	;;
 stop )
 	echo "Stopping ec2 instances" >> $LambdaLogFile
-	start-stop
+	start-stop stop
 	;;
 * )
 	usagehelp
