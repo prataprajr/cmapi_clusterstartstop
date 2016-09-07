@@ -19,6 +19,7 @@ This script lets you start and (gracefully) stop a Cloudera Hadoop cluster. The 
 
 ##List of Scripts
  - startstopcluster.sh
+ - startstopec2instances.sh
  - python/stopcmservices.py
  - python/startcmservices.py
  - python/stopcdhservices.py
@@ -30,5 +31,13 @@ This script lets you start and (gracefully) stop a Cloudera Hadoop cluster. The 
 ```sh
 ./startstopcluster.sh start
 ./startstopcluster.sh stop
+```
+## Stopping AWS instances
+To reduce cost, AWS instances can be stopped after shutting down the cluster. This can also be used for starting instances.
+- Open 'startstopec2instances.sh' and edit parameters as per your environment
+- Execute the script
+``` sh
+./startstopec2instances.sh stop
+./startstopec2instances.sh start
 ```
 
